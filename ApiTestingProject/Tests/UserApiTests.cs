@@ -1,46 +1,40 @@
 ﻿using NUnit.Framework;
 using FluentAssertions;
-using System.Net;
-using System.Threading.Tasks;
-using ApiTestingProject.Models;
 using ApiTestingProject.Utilities;
 
-namespace ApiTestingProject.Tests
+namespace ApiTestingProject.Tests;
+
+[TestFixture]
+public class UserApiTests
 {
-    [TestFixture]
-    public class UserApiTests
+    private ApiClient _apiClient = null!; // Initialize with null-forgiveness
+
+    [SetUp]
+    public void Setup()
     {
-        private ApiClient _apiClient;
+        _apiClient = new ApiClient();
+    }
 
-        [SetUp]
-        public void Setup()
-        {
-            _apiClient = new ApiClient();
-        }
+    [Test]
+    public async Task GetAllUsers_ShouldReturnSuccessfulResponse()
+    {
+        // Act
+        var users = await _apiClient.GetUsersAsync();
 
-        [Test]
-        public async Task GetAllUsers_ShouldReturnSuccessfulResponse()
-        {
-            // Act
-            var response = await _apiClient.ExecuteGetAsync<List<UserModel>>("/users");
+        // Assert
+        users.Should().NotBeNull();
+        users.Should().HaveCountGreaterThan(0);
+    }
 
-            // Assert
-            response.StatusCode.Should().Be(HttpStatusCode.OK);
-            response.Data.Should().NotBeNull();
-            response.Data.Should().HaveCountGreaterThan(0);
-        }
+    [Test]
+    public async Task GetSingleUser_ShouldReturnCorrectUserDetails()
+    {
+        // Act
+        var user = await _apiClient.GetUserAsync(1);
 
-        [Test]
-        public async Task GetSingleUser_ShouldReturnCorrectUserDetails()
-        {
-            // Act
-            var response = await _apiClient.ExecuteGetAsync<UserModel>("/users/1");
-
-            // Assert
-            response.StatusCode.Should().Be(HttpStatusCode.OK);
-            response.Data.Should().NotBeNull();
-            response.Data.Id.Should().Be(1);
-            response.Data.Name.Should().NotBeNullOrEmpty();
-        }
+        // Assert
+        user.Should().NotBeNull();
+        user.Id.Should().Be(1);
+        user.Name.Should().NotBeNullOrEmpty();
     }
 }

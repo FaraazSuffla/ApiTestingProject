@@ -1,22 +1,29 @@
-﻿using RestSharp;
-using System.Threading.Tasks;
+﻿using ApiTestingProject.Models;
+using System.Net.Http.Json;
+using System.Text.Json;
 
-namespace ApiTestingProject.Utilities
+namespace ApiTestingProject.Utilities;
+
+public class ApiClient
 {
-    public class ApiClient
+    private readonly HttpClient _client;
+    private const string BaseUrl = "https://jsonplaceholder.typicode.com";
+
+    public ApiClient()
     {
-        private readonly RestClient _client;
-        private const string BaseUrl = "https://jsonplaceholder.typicode.com";
-
-        public ApiClient()
+        _client = new HttpClient
         {
-            _client = new RestClient(BaseUrl);
-        }
+            BaseAddress = new Uri(BaseUrl)
+        };
+    }
 
-        public async Task<RestResponse<T>> ExecuteGetAsync<T>(string endpoint) where T : class
-        {
-            var request = new RestRequest(endpoint, Method.Get);
-            return await _client.ExecuteAsync<T>(request);
-        }
+    public async Task<List<UserModel>?> GetUsersAsync()
+    {
+        return await _client.GetFromJsonAsync<List<UserModel>>("/users");
+    }
+
+    public async Task<UserModel?> GetUserAsync(int id)
+    {
+        return await _client.GetFromJsonAsync<UserModel>($"/users/{id}");
     }
 }

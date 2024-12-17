@@ -1,20 +1,18 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
-namespace ApiTestingProject.Models
+namespace ApiTestingProject.Models;
+
+public class UserModel
 {
-    public class UserModel
-    {
-        [JsonProperty("id")]
-        public int Id { get; set; }
+    [JsonPropertyName("id")]
+    public int Id { get; set; }
 
-        [JsonProperty("name")]
-        public string Name { get; set; }
+    [JsonPropertyName("name")]
+    public string Name { get; set; } = string.Empty;
 
-        [JsonProperty("username")]
-        public string Username { get; set; }
+    [JsonPropertyName("username")]
+    public string Username { get; set; } = string.Empty;
 
-        [JsonProperty("email")]
-        public string Email { get; set; }
-    }
+    [JsonPropertyName("email")]
+    public string Email { get; set; } = string.Empty;
 }

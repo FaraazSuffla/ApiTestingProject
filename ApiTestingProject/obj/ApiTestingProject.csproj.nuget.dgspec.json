@@ -38,8 +38,9 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "all"
-        }
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net8.0": {
@@ -47,23 +48,19 @@
           "dependencies": {
             "FluentAssertions": {
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[6.12.0, )"
             },
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
-              "version": "[17.12.0, )"
+              "version": "[17.9.0, )"
             },
             "NUnit": {
               "target": "Package",
-              "version": "[4.3.0, )"
-            },
-            "NUnit.Analyzers": {
-              "target": "Package",
-              "version": "[3.9.0, )"
+              "version": "[4.0.1, )"
             },
             "NUnit3TestAdapter": {
               "target": "Package",
-              "version": "[4.6.0, )"
+              "version": "[4.5.0, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",
@@ -73,9 +70,9 @@
               "target": "Package",
               "version": "[112.1.0, )"
             },
-            "coverlet.collector": {
+            "System.Text.Json": {
               "target": "Package",
-              "version": "[6.0.0, )"
+              "version": "[9.0.0, )"
             }
           },
           "imports": [
@@ -93,10 +90,6 @@
             {
               "name": "Microsoft.AspNetCore.App.Ref",
               "version": "[8.0.11, 8.0.11]"
-            },
-            {
-              "name": "Microsoft.Net.Sdk.Compilers.Toolset",
-              "version": "[9.0.101, 9.0.101]"
             },
             {
               "name": "Microsoft.NETCore.App.Ref",
