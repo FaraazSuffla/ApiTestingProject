@@ -1,6 +1,10 @@
 # API Testing Project
 
-## Overview
+![CI](https://github.com/FaraazSuffla/ApiTestingProject/actions/workflows/ci.yml/badge.svg)
+![.NET](https://img.shields.io/badge/.NET-8.0-512BD4?logo=dotnet&logoColor=white)
+![NUnit](https://img.shields.io/badge/NUnit-4.0-brightgreen)
+![License](https://img.shields.io/github/license/FaraazSuffla/ApiTestingProject)
+
 A C# API testing project demonstrating automated testing of REST APIs using NUnit and FluentAssertions. The project tests the [JSONPlaceholder](https://jsonplaceholder.typicode.com) API to retrieve user data.
 
 ## Prerequisites
@@ -19,6 +23,7 @@ A C# API testing project demonstrating automated testing of REST APIs using NUni
 - .NET 8
 - NUnit
 - FluentAssertions
+- RestSharp
 - HttpClient / System.Net.Http.Json
 - System.Text.Json
 
@@ -36,3 +41,6 @@ ApiTestingProject/
 ## Test Scenarios
 - **GetAllUsers_ShouldReturnSuccessfulResponse** — Verifies GET /users returns a non-empty list of users
 - **GetSingleUser_ShouldReturnCorrectUserDetails** — Verifies GET /users/{id} returns the correct user with valid id and name
+
+## CI/CD
+Tests run automatically on every push and pull request via GitHub Actions. See the badge above for current status.
